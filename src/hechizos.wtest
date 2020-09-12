@@ -1,0 +1,28 @@
+import hechizos.*
+
+describe "espectroMalefico" {
+	test "su poder depende de su nombre" {
+		//precondicion: existir espectro malefico con ese nombre
+		
+		//accion: conseguir poder del espectro		
+		const poder = espectroMalefico.poder()
+		
+		//postcondicion: asegurarse que el poder es 17
+		assert.equals(17, poder)
+	}
+	
+	test "es poderoso con mas letras de su limite" {
+		assert.that(espectroMalefico.poderoso())
+	}
+	
+	test "es poderoso con menos letras de su limite" {
+		espectroMalefico.nombre("shazam")
+		assert.notThat(espectroMalefico.poderoso())
+	}
+	
+	
+	test "su poder cambia cuando cambia el nombre" {
+		espectroMalefico.nombre("shazam!")
+		assert.equals(7, espectroMalefico.poder())
+	}
+}
