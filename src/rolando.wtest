@@ -1,0 +1,56 @@
+import rolando.*
+
+describe "fuerzaOscura" {
+	test "se amplifica el valor al eclipsar" {
+		fuerzaOscura.eclipsar()
+		assert.equals(10, fuerzaOscura.valor())
+	}
+}
+
+describe "rolando" {
+
+	test "deberia darnos su poder de hechiceria" {
+		assert.equals(35, rolando.nivelDeHechiceria())
+	}
+	
+	test "deberia darnos su poder luego de cambiar el hechizo favorito" {
+		rolando.hechizoPreferido(espectroMalefico)
+		assert.equals(56, rolando.nivelDeHechiceria())
+	}
+	
+	test "deberia saber que es poderoso si tiene hechizo un poderoso" {
+		rolando.hechizoPreferido(espectroMalefico)
+		assert.that(rolando.poderoso())
+	}
+	
+	test "deberia saber que no es poderoso si no tiene un hechizo poderoso" {
+		assert.notThat(rolando.poderoso())
+	}
+}
+
+describe "espectroMalefico" {
+	test "su poder depende de su nombre" {
+		//precondicion: existir espectro malefico con ese nombre
+		
+		//accion: conseguir poder del espectro		
+		const poder = espectroMalefico.poder()
+		
+		//postcondicion: asegurarse que el poder es 17
+		assert.equals(17, poder)
+	}
+	
+	test "es poderoso con mas letras de su limite" {
+		assert.that(espectroMalefico.poderoso())
+	}
+	
+	test "es poderoso con menos letras de su limite" {
+		espectroMalefico.nombre("shazam")
+		assert.notThat(espectroMalefico.poderoso())
+	}
+	
+	
+	test "su poder cambia cuando cambia el nombre" {
+		espectroMalefico.nombre("shazam!")
+		assert.equals(7, espectroMalefico.poder())
+	}
+}
